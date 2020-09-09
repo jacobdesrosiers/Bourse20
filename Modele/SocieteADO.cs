@@ -15,16 +15,16 @@ namespace Bourses.Modele
         public SocieteADO() { MaBD = new BDBase(); }
         public List<Societe> Recuperer()
         {
-            List<Societe> establishment = new List<Societe>();
+            List<Societe> producteurs = new List<Societe>();
             string sel = "select * from Societes";
             DataSet SetSociete = MaBD.Selection(sel);
             DataTable TableSociete = SetSociete.Tables[0];
 
             foreach (DataRow RowSociete in TableSociete.Rows)
             {
-                establishment.Add(new Societe(RowSociete));
+                producteurs.Add(new Societe(RowSociete));
             }
-            return establishment;
+            return producteurs;
         }
 
         public void Modifier(Societe s)
