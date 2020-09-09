@@ -25,7 +25,7 @@
         </TextBlock>
         
         <!-- Liste de toutes les sociétés-->
-        <ListBox Grid.Row="1" Grid.RowSpan="4" ItemsSource="{Binding SommaireSociete}" SelectedItem="{Binding SocieteSelectionnee}">
+        <ListBox Grid.Row="1" Grid.RowSpan="4" ItemsSource="{Binding SommaireSocietes}" SelectedItem="{Binding SocieteSelectionnee}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">

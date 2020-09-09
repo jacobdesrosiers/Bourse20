@@ -1,6 +1,7 @@
 ﻿using Bourses.Outils;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -13,9 +14,9 @@ namespace Bourses.Modele
         private BDBase MaBD;
 
         public SocieteADO() { MaBD = new BDBase(); }
-        public List<Societe> Recuperer()
+        public ObservableCollection<Societe> Recuperer()
         {
-            List<Societe> producteurs = new List<Societe>();
+            ObservableCollection<Societe> producteurs = new ObservableCollection<Societe>();
             string sel = "select * from Societes";
             DataSet SetSociete = MaBD.Selection(sel);
             DataTable TableSociete = SetSociete.Tables[0];
