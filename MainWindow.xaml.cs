@@ -1,4 +1,5 @@
-﻿using Bourses.Vues;
+﻿using Bourse.Vues;
+using Bourses.Vues;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,7 +41,8 @@ namespace Bourses
 
         private void cmd_transaction(object sender, RoutedEventArgs e)
         {
-
+            img_logo.Visibility = Visibility.Collapsed;
+            presenteurContenu.Content = new EcranTransaction();
         }
 
         private void cmd_quitter(object sender, RoutedEventArgs e)

@@ -118,6 +118,9 @@
     <Compile Include="Vues\EcranSociete.xaml.cs">
       <DependentUpon>EcranSociete.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Vues\EcranTransaction.xaml.cs">
+      <DependentUpon>EcranTransaction.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -135,6 +138,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Vues\EcranSociete.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\EcranTransaction.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

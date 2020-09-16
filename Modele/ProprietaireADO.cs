@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Bourses.Modele
 {
@@ -14,6 +15,7 @@ namespace Bourses.Modele
         private BDBase MaBD;
 
         public ProprietaireADO() { MaBD = new BDBase(); }
+
         public ObservableCollection<Proprietaire> Recuperer()
         {
             ObservableCollection<Proprietaire> establishment = new ObservableCollection<Proprietaire>();
@@ -47,6 +49,33 @@ namespace Bourses.Modele
         {
             string req = "delete from proprietaires where ID = " + id;
             MaBD.Commande(req);
+        }
+
+        public void OpperationComplexe()
+        {
+            try
+            {
+                MaBD.TransactionDebut();
+                Proprietaire p = new Proprietaire();
+                p.Nom = "Vincent";
+                p.Naissance = new DateTime(1998, 07, 28);
+                p.Liquidite = 18000;
+                Ajouter(p);
+
+                p.Nom = "Joe Blo";
+                p.Naissance = new DateTime(1908, 01, 28);
+                p.Liquidite = 180000;
+                Ajouter(p);
+
+                Supprimer(5);
+                MaBD.TransactionAnnulee();
+            }
+            catch (Exception)
+            {
+                MaBD.TransactionAnnulee();
+                MessageBox.Show("Un problème transactionnel est survenu.");
+                throw;
+            }
         }
 
         public void Ajouter(Proprietaire p)

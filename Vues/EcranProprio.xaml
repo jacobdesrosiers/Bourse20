@@ -61,6 +61,7 @@
             <Button Content="Ajouter" Command="{Binding cmdAjouter_Proprio}"></Button>
             <Button Content="Modifier" Command="{Binding cmdModifier_Proprio}"></Button>
             <Button Content="Supprimer" Command="{Binding cmdSupprimer_Proprio}"></Button>
+            <Button Content="Operation complexe" Command="{Binding cmdOperationTransactionnelle}"></Button>
             <!--<Button Content="Vider" Click="cmdVider_Proprio"></Button>--> 
         </StackPanel>
     </Grid>

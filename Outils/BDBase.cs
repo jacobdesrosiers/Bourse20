@@ -15,6 +15,7 @@ namespace Bourses.Outils
         private string ConnexionParam;
         private MySqlConnection MaConnexion;
 
+        private MySqlTransaction maTransaction;
 
         //private string Serveur = "localhost";
         //private string BaseDeDonnee = "bourse20";
@@ -35,7 +36,7 @@ namespace Bourses.Outils
                 MessageBox.Show("Impossible de se connecter :" + e.Message);
                 throw;
             }
-            MessageBox.Show("Instanciation correcte");
+            //MessageBox.Show("Instanciation correcte");
         }
 
         public DataSet Selection(string req)
@@ -83,7 +84,7 @@ namespace Bourses.Outils
             }
             finally
             {
-                Fermer();
+                //Fermer();
             }
             return nbResultat;
         }
@@ -118,6 +119,47 @@ namespace Bourses.Outils
             catch (MySqlException e)
             {
                 MessageBox.Show("Erreur de fermeture :" + e.Message);
+                throw;
+            }
+        }
+
+        public void TransactionDebut()
+        {
+            try
+            {
+                if (Ouvrir())
+                    maTransaction = MaConnexion.BeginTransaction();
+            }
+            catch (MySqlException)
+            {
+                throw;
+            }
+        }
+
+        public void TransactionFin()
+        {
+            try
+            {
+                maTransaction.Commit();
+                maTransaction = null;
+                MaConnexion.Close();
+            }
+            catch (MySqlException)
+            {
+                throw;
+            }
+        }
+
+        public void TransactionAnnulee()
+        {
+            try
+            {
+                maTransaction.Rollback();
+                maTransaction = null;
+                MaConnexion.Close();
+            }
+            catch (MySqlException)
+            {
                 throw;
             }
         }
