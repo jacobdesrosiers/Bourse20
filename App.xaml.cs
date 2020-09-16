@@ -6,12 +6,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Bourses
+namespace Bourse
 {
-    /// <summary>
-    /// Logique d'interaction pour App.xaml
-    /// </summary>
-    public partial class App : Application
-    {
-    }
+	/// <summary>
+	/// Logique d'interaction pour App.xaml
+	/// </summary>
+	public partial class App : Application
+	{
+	}
 }

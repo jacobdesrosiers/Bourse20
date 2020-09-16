@@ -20,10 +20,10 @@
             <ColumnDefinition Width="400"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        
-        <TextBlock Grid.ColumnSpan="2" FontSize="24" Background="Navy" Foreground="Yellow">Les propriétaires capitalistes</TextBlock>
 
-        <ListBox ItemsSource="{Binding SommaireProprietaires}" SelectedItem="{Binding ProprietaireSelectionne}" Grid.Row="1" Grid.RowSpan="4">
+        <TextBlock Grid.ColumnSpan="2" FontSize="24" Background="Navy" Foreground="Yellow">Les Propriétaires Capitalistes</TextBlock>
+
+        <ListBox ItemsSource="{Binding SommaireProprietaires}" SelectedItem="{Binding ProprietaireSelectionne}"  Grid.Row="1" Grid.RowSpan="4">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">
@@ -46,20 +46,22 @@
             </Grid.ColumnDefinitions>
 
             <Label Content="Nom"></Label>
-            <TextBox Grid.Column="1" Name="txt_Nom" Text="{Binding Nom}"></TextBox>
+            <TextBox Name="txt_Nom" Grid.Column="1" Text="{Binding Nom}"></TextBox>
 
-            <Label Grid.Row="1" Content="Date de naissance"></Label>
-            <TextBox Grid.Column="1" Grid.Row="1" Name="txt_Naissance" Text="{Binding Naissance, StringFormat=yyyy-MM-dd}"></TextBox>
+            <Label Content="Date de Naissance" Grid.Row="1"></Label>
+            <TextBox Name="txt_Naissance" Grid.Column="1" Grid.Row="1" Text="{Binding Naissance, StringFormat=yyyy-MM-dd}"></TextBox>
 
-            <Label  Grid.Row="2" Content="Capitaux disponible"></Label>
-            <TextBox Grid.Column="1" Grid.Row="2" Name="txt_Capitaux" Text="{Binding Liquidite}"></TextBox>
+            <Label Content="Capitaux disponible"  Grid.Row="2"></Label>
+            <TextBox Name="txt_Capitaux" Grid.Column="1" Grid.Row="2" Text="{Binding Liquidite}"></TextBox>
+
+            <Image Name="img_Proprio" Source="/Images/Proprios/proprio0.jpg" Grid.Column="2" Grid.RowSpan="3" Stretch="Fill" Height="100" Width="80"/>
         </Grid>
 
         <StackPanel Grid.Column="2" Grid.RowSpan="4">
-            <Button Content="Ajouter" Click="cmdAjouter_Proprio"></Button>
-            <Button Content="Modifier" Click="cmdModifier_Proprio"></Button>
-            <Button Content="Supprimer" Click="cmdSupprimer_Proprio"></Button>
-            <Button Content="Vider" Click="cmdVider_Proprio"></Button>
+            <Button Content="Ajouter" Command="{Binding cmdAjouter_Proprio}"></Button>
+            <Button Content="Modifier" Command="{Binding cmdModifier_Proprio}"></Button>
+            <Button Content="Supprimer" Command="{Binding cmdSupprimer_Proprio}"></Button>
+            <!--<Button Content="Vider" Click="cmdVider_Proprio"></Button>--> 
         </StackPanel>
     </Grid>
 </UserControl>

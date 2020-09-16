@@ -16,17 +16,23 @@ namespace Bourses.Modele
         public SocieteADO() { MaBD = new BDBase(); }
         public ObservableCollection<Societe> Recuperer()
         {
-            ObservableCollection<Societe> producteurs = new ObservableCollection<Societe>();
+         ObservableCollection<Societe> establishment = new ObservableCollection<Societe>();
             string sel = "select * from Societes";
             DataSet SetSociete = MaBD.Selection(sel);
             DataTable TableSociete = SetSociete.Tables[0];
 
             foreach (DataRow RowSociete in TableSociete.Rows)
             {
-                producteurs.Add(new Societe(RowSociete));
+                establishment.Add(new Societe(RowSociete));
             }
-            return producteurs;
+            return establishment;
         }
+
+        public void Ajouter(Societe s)
+        {
+            string req = $"INSERT INTO societes VALUES (null, '{s.RaisonSociale}', {s.NbActions}, {s.ValeurUnitaire}, '{s.DateCreation}')";
+            MaBD.Commande(req);
+		  }
 
         public void Modifier(Societe s)
         {

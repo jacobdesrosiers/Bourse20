@@ -51,7 +51,7 @@ namespace Bourses.Modele
 
         public void Ajouter(Proprietaire p)
         {
-            string req = "insert into proprietaires values( NULL,'" + p.Nom + "','" + p.Naissance + "'," + p.Liquidite + ")";
+            string req = "insert into proprietaires values(NULL,'" + p.Nom + "', '" + p.Naissance + "', " + p.Liquidite + ")";
             MaBD.Commande(req);
         }
     }

@@ -19,17 +19,16 @@
             <ColumnDefinition Width="400"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-
         <TextBlock Grid.ColumnSpan="2" FontSize="24" Background="Navy" Foreground="Yellow">
             Sociétés cotées en bourse
         </TextBlock>
         
-        <!-- Liste de toutes les sociétés-->
+        <!-- Liste de toutes les sociétés -->
         <ListBox Grid.Row="1" Grid.RowSpan="4" ItemsSource="{Binding SommaireSocietes}" SelectedItem="{Binding SocieteSelectionnee}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">
-                        <TextBlock FontSize="14" Text="{Binding RaisonSociale}"></TextBlock>
+                        <TextBlock FontSize="14" Text="{Binding RaisonSociale}"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -47,22 +46,25 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
+            
             <Label Content="Raison Sociale"></Label>
-            <TextBox Name="txtRaisonSociale" Grid.Column="1" Text="{Binding RaisonSociale}"></TextBox>
-            <Label Content="Date de Création" Grid.Row="1"></Label>
-            <TextBox Name="txtDateDeCreation" Grid.Column="1" Grid.Row="1" Text="{Binding DateCreation}"></TextBox>
+            <TextBox x:Name="txtRaisonSociale" Grid.Column="1" Text="{Binding RaisonSociale}"></TextBox>
+            <Label Content="Date de création" Grid.Row="1"></Label>
+            <TextBox x:Name="txtDateDeCreation" Grid.Column="1" Grid.Row="1" Text="{Binding DateCreation}"></TextBox>
             <Label Content="Nombre d'actions" Grid.Row="2"></Label>
-            <TextBox Name="txtNbActions" Grid.Column="1" Grid.Row="2" Text="{Binding NbActions}"></TextBox>
+            <TextBox x:Name="txtNbActions" Grid.Column="1" Grid.Row="2" Text="{Binding NbActions}"></TextBox>
             <Label Content="Valeur unitaire" Grid.Row="3"></Label>
-            <TextBox Name="txtValeurUnitaire" Grid.Column="1" Grid.Row="3" Text="{Binding ValeurUnitaire}"></TextBox>
+            <TextBox x:Name="txtValeurUnitaire" Grid.Column="1" Grid.Row="3" Text="{Binding ValeurUnitaire}"></TextBox>
+
+            <Image Name="img_Societe" Source="/Images/Societes/societe0.jpg" Grid.Column="2" Grid.RowSpan="3" Stretch="Fill" Height="100" Width="80"/>
         </Grid>
 
         <StackPanel Grid.Column="2" Grid.RowSpan="4">
-            <Button Content="Ajouter" Click="cmdAjouter_Societe"></Button>
-            <Button Content="Modifier" Click="cmdModifier_Societe"></Button>
-            <Button Content="Supprimer" Click="cmdSupprimer_Societe"></Button>
-            <Button Content="Vider" Click="cmdVider_Societe"></Button>
+            <Button Content="Ajouter" Command="{Binding cmdAjouter_Societe}"></Button>
+            <Button Content="Modifier" Command="{Binding cmdModifier_Societe}"></Button>
+            <Button Content="Supprimer" Command="{Binding cmdSupprimer_Societe}"></Button>
+            <Button Content="Vider" Command="{Binding cmdVider_Societe}"></Button>
         </StackPanel>
-        
+
     </Grid>
 </UserControl>

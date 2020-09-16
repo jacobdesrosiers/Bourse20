@@ -1,8 +1,5 @@
-﻿using Bourses.Modele;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,64 +12,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Bourse.VuesModele;
 
 namespace Bourses.Vues
 {
     /// <summary>
     /// Logique d'interaction pour EcranSociete.xaml
     /// </summary>
-    public partial class EcranSociete : UserControl, INotifyPropertyChanged
+    public partial class EcranSociete : UserControl
     {
-        private SocieteADO societeADO = new SocieteADO();
-
         public EcranSociete()
         {
             InitializeComponent();
-            DataContext = this;
-            SommaireSocietes = societeADO.Recuperer();
-        }
-
-        private void cmdAjouter_Societe(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void cmdModifier_Societe(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void cmdSupprimer_Societe(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void cmdVider_Societe(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private ObservableCollection<Societe> _sommaireSocietes;
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged(string nomPropriete)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(nomPropriete));
-        }
-
-
-        public ObservableCollection<Societe> SommaireSocietes
-        {
-            get
-            {
-                return _sommaireSocietes;
-            }
-            set
-            {
-                _sommaireSocietes = value;
-                OnPropertyChanged("SommaireSocietes");
-            }
+            DataContext = new Societe_VM();
         }
     }
 }

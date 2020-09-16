@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-VisualStudioVersion = 16.0.30002.166
+VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bourses", "Bourses.csproj", "{7D197769-1047-46AB-8684-A193FC4BC675}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bourse16", "Bourse16.csproj", "{727FD0DC-7A86-4521-A55B-BF96C9A74859}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7D197769-1047-46AB-8684-A193FC4BC675}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7D197769-1047-46AB-8684-A193FC4BC675}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7D197769-1047-46AB-8684-A193FC4BC675}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7D197769-1047-46AB-8684-A193FC4BC675}.Release|Any CPU.Build.0 = Release|Any CPU
+		{727FD0DC-7A86-4521-A55B-BF96C9A74859}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{727FD0DC-7A86-4521-A55B-BF96C9A74859}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{727FD0DC-7A86-4521-A55B-BF96C9A74859}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{727FD0DC-7A86-4521-A55B-BF96C9A74859}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {AEC259DA-3281-4D37-83D7-6D9E23E6FACA}
+		SolutionGuid = {87775DD8-64D7-4378-A9ED-3BA354C47162}
 	EndGlobalSection
 EndGlobal

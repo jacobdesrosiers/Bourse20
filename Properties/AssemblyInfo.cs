@@ -7,11 +7,11 @@ using System.Windows;
 // Les informations générales relatives à un assembly dépendent de
 // l'ensemble d'attributs suivant. Pour modifier les informations
 // associées à un assembly.
-[assembly: AssemblyTitle("Bourses")]
+[assembly: AssemblyTitle("Bourse")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Bourses")]
+[assembly: AssemblyProduct("Bourse")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -32,12 +32,12 @@ using System.Windows;
 
 
 [assembly: ThemeInfo(
-    ResourceDictionaryLocation.None, //où se trouvent les dictionnaires de ressources spécifiques à un thème
-                                     //(utilisé si une ressource est introuvable dans la page,
-                                     // ou dictionnaires de ressources de l'application)
-    ResourceDictionaryLocation.SourceAssembly //où se trouve le dictionnaire de ressources générique
-                                              //(utilisé si une ressource est introuvable dans la page,
-                                              // dans l'application ou dans l'un des dictionnaires de ressources spécifiques à un thème)
+	 ResourceDictionaryLocation.None, //où se trouvent les dictionnaires de ressources spécifiques à un thème
+												 //(utilisé si une ressource est introuvable dans la page,
+												 // ou dictionnaires de ressources de l'application)
+	 ResourceDictionaryLocation.SourceAssembly //où se trouve le dictionnaire de ressources générique
+															 //(utilisé si une ressource est introuvable dans la page,
+															 // dans l'application ou dans l'un des dictionnaires de ressources spécifiques à un thème)
 )]
 
 

@@ -5,23 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Bourses"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Bourse" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="30">
+            </RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <ToolBarTray>
             <ToolBar>
-                <Button Content="Proprio" Click="cmdProprio"></Button>
-                <Button Content="Sociétés" Click="cmdSociete"></Button>
-                <Button Content="Transactions" Click="cmdTransaction"></Button>
-                <Button Content="Quitter" Click="cmdQuitter"></Button>
+                <Button Content="Proprio" Click="cmd_proprio"></Button>
+                <Button Content="Société" Click="cmd_societe" VerticalAlignment="Top"></Button>
+                <Button Content="Transaction" Click="cmd_transaction" VerticalAlignment="Top"></Button>
+                <Button Content="Quitter" Click="cmd_quitter"></Button>
             </ToolBar>
         </ToolBarTray>
-
-        <Image Source="/images/logoBourse.jpg" Grid.Row="1" Stretch="Fill" Name="imgLogo"></Image>
-        <ContentPresenter Grid.Row="1" Name="presenteurContenu"> </ContentPresenter>
-        
+        <Image Source="/images/logoBourse.jpg" Grid.Row="1" Stretch="Fill" Name="img_logo"></Image>
+        <ContentPresenter Grid.Row="1" Name="presenteurContenu"></ContentPresenter>
     </Grid>
 </Window>

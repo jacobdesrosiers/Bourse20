@@ -35,7 +35,7 @@ namespace Bourses.Outils
                 MessageBox.Show("Impossible de se connecter :" + e.Message);
                 throw;
             }
-            MessageBox.Show("Instaciation correct");
+            MessageBox.Show("Instanciation correcte");
         }
 
         public DataSet Selection(string req)
@@ -121,6 +121,5 @@ namespace Bourses.Outils
                 throw;
             }
         }
-
     }
 }

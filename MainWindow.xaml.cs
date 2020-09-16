@@ -26,26 +26,27 @@ namespace Bourses
             InitializeComponent();
         }
 
-        private void cmdProprio(object sender, RoutedEventArgs e)
+        private void cmd_proprio(object sender, RoutedEventArgs e)
         {
-            imgLogo.Visibility = Visibility.Collapsed;
+            img_logo.Visibility = Visibility.Collapsed;
             presenteurContenu.Content = new EcranProprio();
         }
 
-        private void cmdSociete(object sender, RoutedEventArgs e)
+        private void cmd_societe(object sender, RoutedEventArgs e)
         {
-            imgLogo.Visibility = Visibility.Collapsed;
+            img_logo.Visibility = Visibility.Collapsed;
             presenteurContenu.Content = new EcranSociete();
         }
 
-        private void cmdTransaction(object sender, RoutedEventArgs e)
+        private void cmd_transaction(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void cmdQuitter(object sender, RoutedEventArgs e)
+        private void cmd_quitter(object sender, RoutedEventArgs e)
         {
 
         }
+
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Bourses.Modele
 {
-    public class Societe
+    class Societe
     {
         public int ID { get; set; }
         public string RaisonSociale { get; set; }
@@ -15,6 +15,10 @@ namespace Bourses.Modele
         public int ValeurUnitaire { get; set; }
         public DateTime DateCreation { get; set; }
 
+		   public Societe()
+		   {
+
+		   }
         public Societe(DataRow dr)
         {
             ID = (int)dr["id"];
