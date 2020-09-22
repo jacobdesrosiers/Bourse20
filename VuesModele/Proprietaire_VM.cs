@@ -59,6 +59,14 @@ namespace Bourse.VuesModele
                 Nom = _proprietaireSelectionne.Nom;
                 Naissance = _proprietaireSelectionne.Naissance;
                 Liquidite = _proprietaireSelectionne.Liquidite;
+                if(_proprietaireSelectionne.ID < 4)
+                {
+                    EvenementBourse.OnChangementImageProprio(new ChangementImageProprioEventArgs(_proprietaireSelectionne.ID));
+                }
+                else
+                {
+                    EvenementBourse.OnChangementImageProprio(new ChangementImageProprioEventArgs(0));
+                }
                 OnPropertyChanged("ProprietaireSelectionne");
             }
         }
