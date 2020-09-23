@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bourses.Modele
+namespace Bourse.Modele
 {
     public class Societe
     {
@@ -14,11 +15,10 @@ namespace Bourses.Modele
         public int NbActions { get; set; }
         public int ValeurUnitaire { get; set; }
         public DateTime DateCreation { get; set; }
+        public ICollection<Transaction> Actionnaires { get; set; }
 
-		   public Societe()
-		   {
 
-		   }
+        public Societe() { Actionnaires = new Collection<Transaction>(); }
         public Societe(DataRow dr)
         {
             ID = (int)dr["id"];

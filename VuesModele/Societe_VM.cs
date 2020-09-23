@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Bourse.Outils;
-using Bourses.Modele;
+using Bourse.Modele;
 
 namespace Bourse.VuesModele
 {
@@ -23,7 +23,12 @@ namespace Bourse.VuesModele
 			cmdAjouter_Societe = new Commande(cmdAjouter);
 			cmdModifier_Societe = new Commande(cmdModifier);
 			cmdSupprimer_Societe = new Commande(cmdSupprimer);
-			SommaireSocietes = societeADO.Recuperer();
+			// SommaireSocietes = societeADO.Recuperer();
+			SommaireSocietes = new ObservableCollection<Societe>();
+			var sRequete = from soc in OutilEF.BrsCtx.LEconomie select soc;
+
+			foreach (Societe s in sRequete)
+				SommaireSocietes.Add(s);
 		}
 
 		private ObservableCollection<Societe> _sommaireSocietes;

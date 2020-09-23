@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Bourses.Outils
+namespace Bourse.Outils
 {
     class BDBase
     {

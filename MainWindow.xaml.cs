@@ -1,5 +1,5 @@
-﻿using Bourse.Vues;
-using Bourses.Vues;
+﻿using Bourse.Outils;
+using Bourse.Vues;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Bourses
+namespace Bourse
 {
     /// <summary>
     /// Logique d'interaction pour MainWindow.xaml
@@ -25,6 +25,8 @@ namespace Bourses
         public MainWindow()
         {
             InitializeComponent();
+
+            OutilEF outilEF = new OutilEF();
         }
 
         private void cmd_proprio(object sender, RoutedEventArgs e)

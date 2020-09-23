@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Bourse.VuesModele;
 
-namespace Bourses.Vues
+namespace Bourse.Vues
 {
     /// <summary>
     /// Logique d'interaction pour EcranSociete.xaml

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Bourse.Outils;
-using Bourses.Modele;
+using Bourse.Modele;
 
 namespace Bourse.VuesModele
 {
@@ -41,7 +41,7 @@ namespace Bourse.VuesModele
             get { return _sommaireProprietaires; }
             set
             {
-                _sommaireProprietaires = proprietaireADO.Recuperer();
+                _sommaireProprietaires = value;
                 OnPropertyChanged("SommaireProprietaires");
             }
         }
@@ -107,7 +107,14 @@ namespace Bourse.VuesModele
 
         private void initProprio()
         {
-            SommaireProprietaires = proprietaireADO.Recuperer();
+            SommaireProprietaires = new ObservableCollection<Proprietaire>();
+            var pRequete = from proprio in OutilEF.BrsCtx.Capitalistes select proprio;
+
+            foreach (Proprietaire prop in pRequete)
+                SommaireProprietaires.Add(prop);
+
+            // Activer la ligne suivante si vous voulez utiliser ADO et API mySQLi
+            //SommaireProprietaires = proprietaireADO.Recuperer();
 
             //Proprietaire prop = new Proprietaire();
             //prop.Nom = "Lino Saputo";

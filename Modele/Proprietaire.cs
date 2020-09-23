@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bourses.Modele
+namespace Bourse.Modele
 {
     public class Proprietaire
     {
@@ -13,8 +14,9 @@ namespace Bourses.Modele
         public string Nom { get; set; }
         public DateTime Naissance { get; set; }
         public int Liquidite { get; set; }
+        public ICollection<Transaction> PorteFeuille { get; set; }
 
-        public Proprietaire() { }
+        public Proprietaire() { PorteFeuille = new Collection<Transaction>(); }
         public Proprietaire(DataRow dr)
         {
             ID = (int)dr["ID"];

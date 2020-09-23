@@ -1,6 +1,6 @@
 ﻿using Bourse.Outils;
 using Bourse.VuesModele;
-using Bourses.Modele;
+using Bourse.Modele;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,7 +18,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Bourses.Vues
+namespace Bourse.Vues
 {
     /// <summary>
     /// Interaction logic for EcranProprio.xaml
