@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Bourses.Modele
 {
-    class Societe
+    public class Societe
     {
         public int ID { get; set; }
         public string RaisonSociale { get; set; }
