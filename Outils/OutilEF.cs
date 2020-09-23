@@ -27,7 +27,7 @@ namespace Bourse.Outils
                 }
             }
 
-            insertions();
+            //insertions();
         }
 
         private void insertions()

@@ -16,7 +16,8 @@ namespace Bourse.Outils
 
         public BourseContexte() : base("Name = connexionBourse20")
         {
-            Database.SetInitializer<BourseContexte>(new DropCreateDatabaseAlways<BourseContexte>());
+            // Database.SetInitializer<BourseContexte>(new DropCreateDatabaseAlways<BourseContexte>());
+            Database.SetInitializer<BourseContexte>(new CreateDatabaseIfNotExists<BourseContexte>());
         }
 
     }

@@ -64,5 +64,19 @@
             <Button Content="Operation complexe" Command="{Binding cmdOperationTransactionnelle}"></Button>
             <!--<Button Content="Vider" Click="cmdVider_Proprio"></Button>--> 
         </StackPanel>
+
+        <TextBlock Grid.Row="2" Grid.Column="1" FontSize="18" Background="Yellow" Foreground="Red" Text="Posesssions">
+            
+        </TextBlock>
+
+        <DataGrid Grid.Row="3" Grid.Column="1" ItemsSource="{Binding Acquisitions}" AutoGenerateColumns="False" IsReadOnly="True" Name="dg_Posessions">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Cie" Binding="{Binding CIEVendue.RaisonSociale}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Nb actions" Binding="{Binding NbActions}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Valeur : Unit" Binding="{Binding CoutUnitaire}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Total : " Binding="{Binding Total}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        
     </Grid>
 </UserControl>

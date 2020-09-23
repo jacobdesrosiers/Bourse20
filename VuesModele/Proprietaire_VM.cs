@@ -59,6 +59,7 @@ namespace Bourse.VuesModele
                 Nom = _proprietaireSelectionne.Nom;
                 Naissance = _proprietaireSelectionne.Naissance;
                 Liquidite = _proprietaireSelectionne.Liquidite;
+                Acquisitions = (Collection<Transaction>)_proprietaireSelectionne.PorteFeuille;
                 if(_proprietaireSelectionne.ID < 4)
                 {
                     EvenementBourse.OnChangementImageProprio(new ChangementImageProprioEventArgs(_proprietaireSelectionne.ID));
@@ -68,6 +69,17 @@ namespace Bourse.VuesModele
                     EvenementBourse.OnChangementImageProprio(new ChangementImageProprioEventArgs(0));
                 }
                 OnPropertyChanged("ProprietaireSelectionne");
+            }
+        }
+
+        private Collection<Transaction> _acquisitions;
+        public Collection<Transaction> Acquisitions
+        {
+            get { return _acquisitions; }
+            set
+            {
+                _acquisitions = value;
+                OnPropertyChanged("Acquisitions");
             }
         }
 
@@ -108,7 +120,7 @@ namespace Bourse.VuesModele
         private void initProprio()
         {
             SommaireProprietaires = new ObservableCollection<Proprietaire>();
-            var pRequete = from proprio in OutilEF.BrsCtx.Capitalistes select proprio;
+            var pRequete = from proprio in OutilEF.BrsCtx.Capitalistes.Include("PorteFeuille.CIEVendue") select proprio;
 
             foreach (Proprietaire prop in pRequete)
                 SommaireProprietaires.Add(prop);
@@ -132,7 +144,9 @@ namespace Bourse.VuesModele
             p.Liquidite = Liquidite;
 
             SommaireProprietaires.Add(p);
-            proprietaireADO.Ajouter(p);
+            //proprietaireADO.Ajouter(p);
+            OutilEF.BrsCtx.Capitalistes.Add(p);
+            OutilEF.BrsCtx.SaveChanges();
             ProprietaireSelectionne = p;
         }
 
@@ -141,23 +155,20 @@ namespace Bourse.VuesModele
             if (ProprietaireSelectionne == null)
                 return;
 
-            Proprietaire pNeo = new Proprietaire();
-            pNeo.ID = ProprietaireSelectionne.ID;
-            pNeo.Nom = Nom;
-            pNeo.Naissance = Naissance;
-            pNeo.Liquidite = Liquidite;
+            Proprietaire pM = OutilEF.BrsCtx.Capitalistes.Find(ProprietaireSelectionne.ID);
+            pM.ID = ProprietaireSelectionne.ID;
+            pM.Nom = Nom;
+            pM.Naissance = Naissance;
+            pM.Liquidite = Liquidite;
+            ProprietaireSelectionne = pM;
+            OutilEF.BrsCtx.SaveChanges();
 
-            ObservableCollection<Proprietaire> listPropTmp = new ObservableCollection<Proprietaire>();
-            foreach (Proprietaire p in SommaireProprietaires)
+            var pRequete = from prop in OutilEF.BrsCtx.Capitalistes select prop;
+            SommaireProprietaires = new ObservableCollection<Proprietaire>();
+            foreach (Proprietaire p in pRequete)
             {
-                if (p.ID == pNeo.ID)
-                    listPropTmp.Add(pNeo);
-                else
-                    listPropTmp.Add(p);
+                SommaireProprietaires.Add(p);
             }
-            proprietaireADO.Modifier(pNeo);
-            SommaireProprietaires = listPropTmp;
-            ProprietaireSelectionne = pNeo;
         }
 
         private void cmdSupprimer(object param)
