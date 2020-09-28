@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Bourse.Outils;
 using Bourse.VuesModele;
 
 namespace Bourse.Vues
@@ -24,7 +25,18 @@ namespace Bourse.Vues
         public EcranSociete()
         {
             InitializeComponent();
+            EvenementBourse.ChangementImageSociete += AjusteImageSociete;
             DataContext = new Societe_VM();
+        }
+
+        public void AjusteImageSociete(object sender, ChangementImageSocieteEventArgs e)
+        {
+            BitmapImage bmiSociete = new BitmapImage();
+            bmiSociete.BeginInit();
+            bmiSociete.UriSource = new Uri("pack://application:,,,/Images/Societes/Societe" + e.SocieteId + ".jpg");
+            bmiSociete.EndInit();
+
+            img_Societe.Source = bmiSociete;
         }
     }
 }

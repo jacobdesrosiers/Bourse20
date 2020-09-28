@@ -58,8 +58,16 @@ namespace Bourse.VuesModele
                DateCreation = _societeSelectionnee.DateCreation;
                ValeurUnitaire = _societeSelectionnee.ValeurUnitaire;
 				}
-            OnPropertyChanged("SocieteSelectionnee");
-         }
+				if (_societeSelectionnee.ID < 4)
+				{
+					EvenementBourse.OnChangementImageSociete(new ChangementImageSocieteEventArgs(_societeSelectionnee.ID));
+				}
+				else
+				{
+					EvenementBourse.OnChangementImageSociete(new ChangementImageSocieteEventArgs(0));
+				}
+				OnPropertyChanged("societeSelectionne");
+			}
 		}
 
 		private string _raisonSociale;
