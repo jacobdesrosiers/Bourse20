@@ -13,10 +13,11 @@ namespace Bourse.Modele
         public int NbActions { get; set; }
         public int CoutUnitaire { get; set; }
         public DateTime DateTrx { get; set; }
+        private int _total;
         public int Total 
         { 
             get { return CoutUnitaire * NbActions; }
-            set { Total = value; } 
+            set { _total = value; } 
         }
         public Proprietaire Acheteur {get;set;}
         public Societe CIEVendue { get; set; }

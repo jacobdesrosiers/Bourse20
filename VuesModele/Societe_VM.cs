@@ -13,19 +13,21 @@ namespace Bourse.VuesModele
 {
 	class Societe_VM : INotifyPropertyChanged
    {
-      private SocieteADO societeADO = new SocieteADO();
+      //private SocieteADO societeADO = new SocieteADO();
       public ICommand cmdAjouter_Societe { get; set; }
       public ICommand cmdModifier_Societe { get; set; }
       public ICommand cmdSupprimer_Societe { get; set; }
+	  public ICommand cmdVider_Societe { get; set; }
 
 		public Societe_VM()
 		{
 			cmdAjouter_Societe = new Commande(cmdAjouter);
 			cmdModifier_Societe = new Commande(cmdModifier);
 			cmdSupprimer_Societe = new Commande(cmdSupprimer);
+			cmdVider_Societe = new Commande(cmdVider);
 			// SommaireSocietes = societeADO.Recuperer();
 			SommaireSocietes = new ObservableCollection<Societe>();
-			var sRequete = from soc in OutilEF.BrsCtx.LEconomie select soc;
+			var sRequete = from soc in OutilEF.BrsCtx.LEconomie.Include("Actionnaires.Acheteur") select soc;
 
 			foreach (Societe s in sRequete)
 				SommaireSocietes.Add(s);
@@ -48,25 +50,38 @@ namespace Bourse.VuesModele
 		public Societe SocieteSelectionnee
 		{
 			get { return _societeSelectionnee; }
-			set 
-         { 
-            _societeSelectionnee = value;
+			set
+			{
+				_societeSelectionnee = value;
 				if (_societeSelectionnee != null)
 				{
-               RaisonSociale = _societeSelectionnee.RaisonSociale;
-               NbActions = _societeSelectionnee.NbActions;
-               DateCreation = _societeSelectionnee.DateCreation;
-               ValeurUnitaire = _societeSelectionnee.ValeurUnitaire;
-				}
-				if (_societeSelectionnee.ID < 4)
-				{
-					EvenementBourse.OnChangementImageSociete(new ChangementImageSocieteEventArgs(_societeSelectionnee.ID));
-				}
-				else
-				{
-					EvenementBourse.OnChangementImageSociete(new ChangementImageSocieteEventArgs(0));
+					RaisonSociale = _societeSelectionnee.RaisonSociale;
+					NbActions = _societeSelectionnee.NbActions;
+					DateCreation = _societeSelectionnee.DateCreation;
+					ValeurUnitaire = _societeSelectionnee.ValeurUnitaire;
+					Actionnaires = _societeSelectionnee.Actionnaires;
+					if (_societeSelectionnee.ID < 4)
+					{
+						EvenementBourse.OnChangementImageSociete(new ChangementImageSocieteEventArgs(_societeSelectionnee.ID));
+					}
+					else
+					{
+						EvenementBourse.OnChangementImageSociete(new ChangementImageSocieteEventArgs(0));
+					}
 				}
 				OnPropertyChanged("societeSelectionne");
+			}
+		}
+
+		private ObservableCollection<Transaction> _actionnaires;
+
+		public ObservableCollection<Transaction> Actionnaires
+		{
+			get { return _actionnaires; }
+			set
+			{
+				_actionnaires = value;
+				OnPropertyChanged("Actionnaires");
 			}
 		}
 
@@ -117,11 +132,6 @@ namespace Bourse.VuesModele
             OnPropertyChanged("DateCreation");
          }
 		}
-
-
-		
-
-
 		
       private void cmdAjouter(object param)
       {
@@ -132,7 +142,9 @@ namespace Bourse.VuesModele
          s.ValeurUnitaire = ValeurUnitaire;
 
 			SommaireSocietes.Add(s);
-			societeADO.Ajouter(s);
+			OutilEF.BrsCtx.LEconomie.Add(s);
+			OutilEF.BrsCtx.SaveChanges();
+			//societeADO.Ajouter(s);
 			SocieteSelectionnee = s;
 		}
 
@@ -141,24 +153,26 @@ namespace Bourse.VuesModele
 			if (SocieteSelectionnee == null)
 				return;
 
-			Societe sNeo = new Societe();
-			sNeo.ID = SocieteSelectionnee.ID;
-			sNeo.RaisonSociale = RaisonSociale;
-			sNeo.DateCreation = DateCreation;
-			sNeo.NbActions = NbActions;
-			sNeo.ValeurUnitaire = ValeurUnitaire;
+			Societe socMod = OutilEF.BrsCtx.LEconomie.Find(SocieteSelectionnee.ID);
+			socMod.RaisonSociale = RaisonSociale;
+			socMod.DateCreation = DateCreation;
+			socMod.NbActions = NbActions;
+			socMod.ValeurUnitaire = ValeurUnitaire;
 
-			ObservableCollection<Societe> listSocTmp = new ObservableCollection<Societe>();
-			foreach (Societe s in SommaireSocietes)
-			{
-				if (s.ID == sNeo.ID)
-					listSocTmp.Add(sNeo);
-				else
-					listSocTmp.Add(s);
-			}
-			societeADO.Modifier(sNeo);
-			SommaireSocietes = listSocTmp;
-			SocieteSelectionnee = sNeo;
+			//ObservableCollection<Societe> listSocTmp = new ObservableCollection<Societe>();
+			//foreach (Societe s in SommaireSocietes)
+			//{
+			//	if (s.ID == sNeo.ID)
+			//		listSocTmp.Add(sNeo);
+			//	else
+			//		listSocTmp.Add(s);
+			//}
+
+			//societeADO.Modifier(sNeo);
+			//SommaireSocietes = listSocTmp;
+
+			SocieteSelectionnee = socMod;
+			OutilEF.BrsCtx.SaveChanges();
 		}
 
       private void cmdSupprimer(object param)
@@ -166,7 +180,9 @@ namespace Bourse.VuesModele
 			if (SocieteSelectionnee == null)
 				return;
 
-			societeADO.Supprimer(SocieteSelectionnee.ID);
+			//societeADO.Supprimer(SocieteSelectionnee.ID);
+
+			OutilEF.BrsCtx.LEconomie.Remove(SocieteSelectionnee);
 			SommaireSocietes.Remove(SocieteSelectionnee);
 			SocieteSelectionnee = null;
 			RaisonSociale = null;
@@ -175,7 +191,18 @@ namespace Bourse.VuesModele
 			DateCreation = new DateTime();
 		}
 
-      public event PropertyChangedEventHandler PropertyChanged;
+		private void cmdVider(object param)
+        {
+			SocieteSelectionnee = null;
+			RaisonSociale = null;
+			NbActions = 0;
+			ValeurUnitaire = 0;
+			DateCreation = new DateTime();
+			EvenementBourse.OnChangementImageSociete(new ChangementImageSocieteEventArgs(0));
+		}
+
+
+	  public event PropertyChangedEventHandler PropertyChanged;
       private void OnPropertyChanged(string nomPropriete)
       {
          if (PropertyChanged != null)

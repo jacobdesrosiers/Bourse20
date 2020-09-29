@@ -15,10 +15,10 @@ namespace Bourse.Modele
         public int NbActions { get; set; }
         public int ValeurUnitaire { get; set; }
         public DateTime DateCreation { get; set; }
-        public ICollection<Transaction> Actionnaires { get; set; }
+        public ObservableCollection<Transaction> Actionnaires { get; set; }
 
 
-        public Societe() { Actionnaires = new Collection<Transaction>(); }
+        public Societe() { Actionnaires = new ObservableCollection<Transaction>(); }
         public Societe(DataRow dr)
         {
             ID = (int)dr["id"];

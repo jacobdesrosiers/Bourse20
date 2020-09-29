@@ -17,8 +17,29 @@ namespace Bourse.VuesModele
         public ICommand cmdAjouterTrx { get; set; }
         public ICommand cmdViderChamps { get; set; }
 
+        public Transaction_VM()
+        {
+            cmdAjouterTrx = new Commande(AquisitionDActions);
+            cmdViderChamps = new Commande(ViderChamps);
+            ListeProprietaires = new ObservableCollection<Proprietaire>();
+            ListeSocietes = new ObservableCollection<Societe>();
+            ListeTrx = new ObservableCollection<Transaction>();
+
+            var PReq = from p in OutilEF.BrsCtx.Capitalistes select p;
+            foreach (Proprietaire p in PReq)
+                ListeProprietaires.Add(p);
+
+            var SReq = from s in OutilEF.BrsCtx.LEconomie select s;
+            foreach (Societe s in SReq)
+                ListeSocietes.Add(s);
+
+            var TReq = from t in OutilEF.BrsCtx.RegistreTrx select t;
+            foreach (Transaction t in TReq)
+                ListeTrx.Add(t);
+        }
+
         private Proprietaire _proprietaireSelectionne;
-        public Proprietaire ProprietaireSelectione 
+        public Proprietaire ProprietaireSelectionne 
         {
             get
             {
@@ -39,12 +60,13 @@ namespace Bourse.VuesModele
                     {
                         Trxtxt += "?";
                     }
+                    TransactionTexte = Trxtxt;
                 }
                 else
                 {
                     _proprietaireSelectionne = null;
                 }
-                OnPropertyChanged("ProprietaireSelectione");
+                OnPropertyChanged("ProprietaireSelectionne");
             }
         }
 
@@ -70,6 +92,7 @@ namespace Bourse.VuesModele
                     {
                         Trxtxt += "? achète du " + _societeSelectionnee.RaisonSociale;
                     }
+                    TransactionTexte = Trxtxt;
                 }
                 else
                 {
@@ -91,15 +114,15 @@ namespace Bourse.VuesModele
             }
         }
 
-        private string _qttAcquise;
-        public string QttAcquise 
+        private string _qttAcquises;
+        public string QttAcquises 
         {
-            get { return _qttAcquise; }
+            get { return _qttAcquises; }
 
             set
             {
-                _qttAcquise = value;
-                OnPropertyChanged("QttAcquise");
+                _qttAcquises = value;
+                OnPropertyChanged("QttAcquises");
             }
         }
 
@@ -139,15 +162,10 @@ namespace Bourse.VuesModele
             }
         }
 
-        public Transaction_VM()
-        {
-            cmdAjouterTrx = new Commande(AquisitionDActions);
-            cmdViderChamps = new Commande(ViderChamps);
-        }
 
         public void ViderChamps(object param)
         {
-            ProprietaireSelectione = null;
+            ProprietaireSelectionne = null;
             SocieteSelectionnee = null;
             TransactionTexte = "";
         }
@@ -158,12 +176,14 @@ namespace Bourse.VuesModele
             t.Acheteur = _proprietaireSelectionne;
             t.CIEVendue = _societeSelectionnee;
 
-            t.NbActions = Convert.ToInt32(QttAcquise);
+            t.NbActions = Convert.ToInt32(QttAcquises);
             t.CoutUnitaire = _societeSelectionnee.ValeurUnitaire;
             t.Total = t.NbActions * t.CoutUnitaire;
+            t.DateTrx = DateTime.Now;
 
             ListeTrx.Add(t);
             OutilEF.BrsCtx.RegistreTrx.Add(t);
+            OutilEF.BrsCtx.SaveChanges();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

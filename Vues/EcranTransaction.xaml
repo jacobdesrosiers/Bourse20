@@ -32,7 +32,7 @@
 
             <DataGrid.RowDetailsTemplate>
                 <DataTemplate>
-                    <TextBlock Text="On expérimente"></TextBlock>
+                   
                 </DataTemplate>
             </DataGrid.RowDetailsTemplate>
         </DataGrid>
@@ -48,11 +48,6 @@
                 <DataGridTextColumn Header="Val. unit" Binding="{Binding ValeurUnitaire}" Width="*"></DataGridTextColumn>
             </DataGrid.Columns>
 
-            <DataGrid.RowDetailsTemplate>
-                <DataTemplate>
-                    <TextBlock Text="On expérimente"></TextBlock>
-                </DataTemplate>
-            </DataGrid.RowDetailsTemplate>
         </DataGrid>
         
         <!-- Liste de toutes les transactions -->
@@ -62,19 +57,24 @@
                   ItemsSource="{Binding ListeTrx}">
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Num trx" Binding="{Binding TransactionId}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Proprio" Binding="{Binding ProprietaireId}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Cie" Binding="{Binding SocieteId}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Num trx" Binding="{Binding Id}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Proprio" Binding="{Binding Acheteur.Nom}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Cie" Binding="{Binding CIEVendue.RaisonSociale}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Nb actions" Binding="{Binding NbActions}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Valeur" Binding="{Binding ValeurUnitaire}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Valeur" Binding="{Binding CoutUnitaire}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Total" Binding="{Binding Total}"></DataGridTextColumn>
             </DataGrid.Columns>
 
         </DataGrid>
 
         <StackPanel Grid.Row="2" Grid.Column="1" Grid.RowSpan="4">
-            <TextBlock Grid.Row="1" Height="50" Name="TxbTransactions" Text="{Binding TransactionText}"></TextBlock>
-            <Button Content="Ajouter"></Button>
-            <Button Content="Vider"></Button>
+            <TextBlock Grid.Row="1" Height="50" Name="TxbTransactions" Text="{Binding TransactionTexte}"></TextBlock>
+            <WrapPanel>
+                <Label Content="Quantité d'actions:"></Label>
+                <TextBox Name="tb_QttAcquises" Width="100" Text="{Binding QttAcquises}"></TextBox>
+            </WrapPanel>
+            <Button Content="Ajouter" Command="{Binding cmdAjouterTrx}"></Button>
+            <Button Content="Vider" Command="{Binding cmdViderChamps}"></Button>
         </StackPanel>
         
     </Grid>
